@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Ardalis.GuardClauses;
 using Newtonsoft.Json;
 
 namespace pdouelle.Errors
@@ -16,7 +17,7 @@ namespace pdouelle.Errors
         {
         }
 
-        public ResourceNotFound(MemberInfo type, string propertyName, object? value) : this(type, propertyName, value?.ToString())
+        public ResourceNotFound(MemberInfo type, string propertyName, object value) : this(type, propertyName, value?.ToString())
         {
         }
 
@@ -24,6 +25,11 @@ namespace pdouelle.Errors
         {
         }
 
-        public static implicit operator string(ResourceNotFound resourceNotFound) => resourceNotFound.ToString();
+        public static implicit operator string(ResourceNotFound resourceNotFound)
+        {
+            Guard.Against.Null(resourceNotFound, nameof(resourceNotFound));
+
+            return resourceNotFound.ToString();
+        }
     }
 }
