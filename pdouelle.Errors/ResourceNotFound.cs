@@ -12,11 +12,11 @@ namespace pdouelle.Errors
             Detail = $"Resource of type '{type.Name}' with {propertyName} '{value}' does not exist.";
         }
 
-        public ResourceNotFound(MemberInfo type, string propertyName, Guid value) : this(type, propertyName, value.ToString())
+        public ResourceNotFound(MemberInfo type, string propertyName, Guid? value) : this(type, propertyName, value?.ToString())
         {
         }
 
-        public ResourceNotFound(MemberInfo type, string propertyName, object value) : this(type, propertyName, value.ToString())
+        public ResourceNotFound(MemberInfo type, string propertyName, object? value) : this(type, propertyName, value?.ToString())
         {
         }
 
